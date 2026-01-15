@@ -7,7 +7,7 @@ name = "Sharkey"
 description.en = "Microblogging platform"
 description.fr = "Platforme de Microblogging"
 
-version = "2025.4.4~ynh1"
+version = "2025.4.5~ynh1"
 
 maintainers = ["oufmilo"]
 
@@ -17,7 +17,7 @@ website = "https://git.joinsharkey.org/Sharkey"
 code = "https://activitypub.software/TransFem-org/Sharkey"
 
 [integration]
-yunohost = ">= 12.1.17"
+yunohost = ">= 12.1.38"
 helpers_version = "2.1"
 architectures = "all"
 multi_instance = false
@@ -42,8 +42,8 @@ ram.runtime = "50M"
 [resources]
 
     [resources.sources.main]
-    url = "https://activitypub.software/TransFem-org/Sharkey/-/archive/2025.4.4/Sharkey-2025.4.4.tar.bz2"
-    sha256 = "c488276db477fdc855553de5d7371f54b95c04590bdca04aac27b1d31f1aed55"
+    url = "https://activitypub.software/TransFem-org/Sharkey/-/archive/2025.4.5/Sharkey-2025.4.5.tar.bz2"
+    sha256 = "cb4e6e7cfe397a642dccaa447b3725afd1146186e89ef772212f676e8dad511d"
     autoupdate.strategy = "latest_gitlab_release"
 
     [resources.sources.fluent-emojis]
