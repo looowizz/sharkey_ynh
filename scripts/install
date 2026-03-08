@@ -18,9 +18,14 @@ ynh_hide_warnings corepack enable && corepack prepare pnpm@latest --activate
 #=================================================
 ynh_script_progression "Setting up source files..."
 
-ynh_setup_source --dest_dir="$install_dir"
-ynh_setup_source --dest_dir="$install_dir/fluent-emojis" --source_id="fluent-emojis" --full_replace=1
-ynh_setup_source --dest_dir="$install_dir/tossface-emojis" --source_id="tossface-emojis" --full_replace=1
+
+mkdir -p "$install_dir"
+chown -R $app:www-data "$install_dir"
+
+ynh_hide_warnings git clone --recurse-submodules -b stable https://activitypub.software/TransFem-org/Sharkey.git "$install_dir"
+
+chmod -R o-rwx "$install_dir"
+chown -R $app:www-data "$install_dir"
 
 #=================================================
 # APP INITIAL CONFIGURATION
@@ -43,6 +48,7 @@ pushd "$install_dir"
 	ynh_hide_warnings corepack enable && corepack prepare pnpm@latest --activate
 	ynh_hide_warnings ynh_exec_as_app COREPACK_ENABLE_DOWNLOAD_PROMPT=0 NODE_OPTIONS="--max-old-space-size=3000" pnpm install --frozen-lockfile
 	ynh_hide_warnings ynh_exec_as_app NODE_ENV=production NODE_OPTIONS="--max-old-space-size=3000" pnpm build
+	ynh_hide_warnings ynh_exec_as_app pnpm run init
 popd
 
 #=================================================

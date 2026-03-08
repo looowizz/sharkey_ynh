@@ -25,9 +25,15 @@ ynh_hide_warnings corepack enable && corepack prepare pnpm@latest --activate
 #=================================================
 ynh_script_progression "Upgrading source files..."
 
-ynh_setup_source --dest_dir="$install_dir"
-ynh_setup_source --dest_dir="$install_dir/fluent-emojis" --source_id="fluent-emojis" --full_replace=1
-ynh_setup_source --dest_dir="$install_dir/tossface-emojis" --source_id="tossface-emojis" --full_replace=1
+pushd $install_dir
+	chown -R $app:www-data "$install_dir"
+	ynh_hide_warnings ynh_exec_as_app git checkout stable
+	ynh_hide_warnings ynh_exec_as_app git pull --recurse-submodules
+popd
+
+chmod 750 "$install_dir"
+chmod -R o-rwx "$install_dir"
+chown -R $app:www-data "$install_dir"
 
 #=================================================
 # BUILD APP
